@@ -71,4 +71,7 @@ do {
         break;
     }
   }
+  else{
+    alert("Ese digito no corresponde a ningun comic, intentalo de vuelta!")
+  }
 } while (condicion);
