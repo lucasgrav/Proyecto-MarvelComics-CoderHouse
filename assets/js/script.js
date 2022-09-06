@@ -50,7 +50,7 @@ function compraDeComics() {
 
     let comprarComic = prompt(
       `El precio del comic de ${comicSeleccionado.nombre} es de $${comicSeleccionado.precio}, desea comprarlo? coloque si o no`
-    );
+    ).toLowerCase();
     switch (comprarComic) {
       case "si":
         let cuotas = parseInt(
@@ -83,6 +83,11 @@ function busquedaDeComic() {
       comic.editorial.toLowerCase().indexOf(busquedaComic) > -1 ||
       comic.nombre.toLowerCase().indexOf(busquedaComic) > -1
   );
+  if(resultadoBusqueda.length > 0){
+   listadoDeComics(resultadoBusqueda)
+  }else{
+    alert(`No existe ningun comic que incluya el termino ${busquedaComic}`)
+  }
 }
 
 // FUNCION PARA OPCION 3
@@ -99,7 +104,7 @@ function listadoDeComics(lista) {
 do {
   let menuDePagina = parseInt(
     prompt(
-      "Bienvenido a ComicZone que desea realizar:  \n1- Comprar comics  \n2- Buscar comics por editorial  \n3- Ver Listado de Comics \n4- Salir"
+      "Bienvenido a ComicZone que desea realizar:  \n1- Comprar comics  \n2- Buscar comics  \n3- Ver Listado de Comics \n4- Salir"
     )
   );
   switch (menuDePagina) {
