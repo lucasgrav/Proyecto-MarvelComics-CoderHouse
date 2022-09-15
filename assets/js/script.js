@@ -49,7 +49,7 @@ function compraDeComics() {
     let comicSeleccionado = comics.find((comic) => comic.id == comprarComics);
 
     let comprarComic = prompt(
-      `El precio del comic de ${comicSeleccionado.nombre} es de $${comicSeleccionado.precio}, desea comprarlo? coloque si o no`
+      `El precio del comic de ${comics.nombre} es de $${comics.precio}, desea comprarlo? coloque si o no`
     ).toLowerCase();
     switch (comprarComic) {
       case "si":
@@ -57,9 +57,9 @@ function compraDeComics() {
           prompt("Desea pagarlo en 1, 2 o 3 cuotas sin interes?")
         );
         cuotasFuncion(
-          comicSeleccionado.nombre,
+          comics.nombre,
           cuotas,
-          comicSeleccionado.precio
+          comics.precio
         );
         break;
 
@@ -83,11 +83,12 @@ function busquedaDeComic() {
       comic.editorial.toLowerCase().indexOf(busquedaComic) > -1 ||
       comic.nombre.toLowerCase().indexOf(busquedaComic) > -1
   );
-  if(resultadoBusqueda.length > 0){
-   listadoDeComics(resultadoBusqueda)
-  }else{
-    alert(`No existe ningun comic que incluya el termino ${busquedaComic}`)
+  if (resultadoBusqueda.length > 0) {
+    listadoDeComics(resultadoBusqueda);
+  } else {
+    alert(`No existe ningun comic que incluya el termino ${busquedaComic}`);
   }
+  
 }
 
 // FUNCION PARA OPCION 3
@@ -100,29 +101,39 @@ function listadoDeComics(lista) {
   alert(`Puede ver el listado de comics: \n ${listaComics}`);
 }
 
-//CICLO
-do {
-  let menuDePagina = parseInt(
-    prompt(
-      "Bienvenido a ComicZone que desea realizar:  \n1- Comprar comics  \n2- Buscar comics  \n3- Ver Listado de Comics \n4- Salir"
-    )
-  );
-  switch (menuDePagina) {
-    case 1:
-      compraDeComics();
-      break;
-    case 2:
-      busquedaDeComic();
-      break;
-    case 3:
-      listadoDeComics(comics);
-      break;
-    case 4:
-      alert("Muchas gracias por visitarnos! Vuelva Pronto!");
-      condicion = false;
-      break;
-    default:
-      alert("Digito incorrecto, intentelo de nuevo!");
-      break;
-  }
-} while (condicion);
+function mostrarComics(){
+    let productosComics = document.getElementById("productosComics")
+  comics.forEach((comics)=>{
+  let nuevoComic = document.createElement("div")
+  nuevoComic.innerHTML = `<div class="cardsComics">
+  <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">${comics.nombre}</h4>
+        <p>Editorial:${comics.editorial}</p>
+        <p>Precio:$${comics.precio}</p>
+        <a  class="btn btn-primary btnComprar">Comprar.</a>
+      </div>
+    </div>
+  </div>`
+  productosComics.appendChild(nuevoComic)
+  verListadoComics.setAttribute("disabled", '')
+  })
+}
+
+
+let verListadoComics = document.getElementById("verList")
+verListadoComics.addEventListener("click", mostrarComics)
+
+let buscarComics = document.getElementById("buscarComics")
+buscarComics.addEventListener("click", busquedaDeComic)
+
+let btnComprar = document.getElementsByClassName("btnComprar")
+for(let comprar of btnComprar){
+comprar.addEventListener("click", ()=>{
+  alert("comprado")
+})
+}
+
+
+
