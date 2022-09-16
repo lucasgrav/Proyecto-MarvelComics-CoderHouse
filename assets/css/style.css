@@ -19,9 +19,9 @@ h2{
   margin-top: 10px;
 }
 .cardsComics{
-  margin-top: 20px;
+  margin: 20px;
   display: flex;
-  justify-content:center ;
+  justify-content: center;
 }
 body{
   background-image: url();
