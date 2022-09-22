@@ -4,55 +4,95 @@ let visibleListado = true;
 
 //ARRAYS
 const comics = [
-  { id: 1, nombre: "Iron Man", precio: 1500, editorial: "Marvel" },
-  { id: 2, nombre: "Capitan America", precio: 1500, editorial: "Marvel" },
-  { id: 3, nombre: "SpiderMan", precio: 2000, editorial: "Marvel" },
-  { id: 4, nombre: "Batman", precio: 2200, editorial: "Dc" },
-  { id: 5, nombre: "Los jovenes titanes", precio: 1700, editorial: "Dc" },
-  { id: 6, nombre: "El acertijo", precio: 2500, editorial: "Dc" },
+  {
+    id: 1,
+    nombre: "Iron Man",
+    precio: 1500,
+    editorial: "Marvel",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
+  {
+    id: 2,
+    nombre: "Capitan America",
+    precio: 1500,
+    editorial: "Marvel",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
+  {
+    id: 3,
+    nombre: "SpiderMan",
+    precio: 2000,
+    editorial: "Marvel",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
+  {
+    id: 4,
+    nombre: "Batman",
+    precio: 2200,
+    editorial: "Dc",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
+  {
+    id: 5,
+    nombre: "Los jovenes titanes",
+    precio: 1700,
+    editorial: "Dc",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
+  {
+    id: 6,
+    nombre: "El acertijo",
+    precio: 2500,
+    editorial: "Dc",
+    imagen: "./assets/images/iron-man-1.jpg",
+  },
 ];
-//FUNCIONES
-function cuotasFuncion(nombreComic, cantidadCuotas, precioComic) {
-  let divisionCuotas = parseInt(precioComic / cantidadCuotas);
-  let compra = prompt(
-    `Desea comprar el comic de ${nombreComic} a ${cantidadCuotas} cuota de $${divisionCuotas}? si o no?`
-  );
-  switch (compra) {
-    case "si":
-      alert("Muchas gracias por su compra!");
-      condicion = false;
-      break;
+let comicsEnElCarrito = [];
 
-    case "no":
-      alert("No hay problema, volvera al inicio");
-      break;
-
-    default:
-      alert("Comando incorrecto, volvamos a empezar!");
-      break;
-  }
+//FUNCION PARA AGREGAR AL CARRITO
+function agregarAlCarrito(comic) {
+  comicsEnElCarrito.push(comic);
 }
-//FUNCION PARA OPCION 1
-function compraDeComics(nombreDelComic, precioDelComic) {
-  let comprarComic = prompt(
-    `El precio del comic de ${nombreDelComic} es de $${precioDelComic}, desea comprarlo? coloque si o no`
-  ).toLowerCase();
-  switch (comprarComic) {
-    case "si":
-      let cuotas = parseInt(
-        prompt("Desea pagarlo en 1, 2 o 3 cuotas sin interes?")
-      );
-      cuotasFuncion(nombreDelComic, cuotas, precioDelComic);
-      break;
 
-    case "no":
-      alert("No se preocupe, lo devolveremos al inicio!");
-      break;
+function cargarComicsEnElCarrito(array) {
+  modalBody.innerHTML = "";
+  array.forEach((comicCarrito) => {
+    modalBody.innerHTML += `
+        <div class="card border-primary mb-3" id ="productoCarrito${comicCarrito.id}" style="max-width: 540px;">
+            <img class="card-img-top" src="${comicCarrito.imagen}" alt="${comicCarrito.nombre}">
+            <div class="card-body">
+                    <h4 class="card-title">${comicCarrito.nombre}</h4>
+                
+                    <p class="card-text">$${comicCarrito.precio}</p> 
+                    <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
+            </div>                    
+        </div>
+`;
+  });
+  totalDeLaCompra(comicsEnElCarrito)
+}
 
-    default:
-      alert("Opcion incorrecta, volvamos a empezar!");
-      break;
+function totalDeLaCompra(array){
+  let acumulador = 0
+  acumulador = array.reduce((acumulador, comicCarrito)=>{
+  return acumulador + comicCarrito.precio
+  }, 0)
+  if(acumulador == 0){
+    parrafoCompra.innerHTML = `No hay comics en el carrito, agregue alguno!`
   }
+  else{
+  parrafoCompra.innerHTML = `El total es $${acumulador}`
+}
+}
+
+function guardarCarritoEnElStorage(){
+  localStorage.setItem("carritoDeComics", JSON.stringify(comicsEnElCarrito))
+}
+function obtenerCarritoDelStorage(){
+ let getComics = localStorage.getItem("carritoDeComics")
+ if(getComics != null){
+  comicsEnElCarrito = JSON.parse(getComics)
+ }
 }
 
 //FUNCION PARA MOSTRAR LISTADO
@@ -65,29 +105,25 @@ function mostrarComics(comicsMostrar) {
     comicsMostrar.forEach((comic) => {
       let nuevoComic = document.createElement("div");
       nuevoComic.innerHTML = `<div class="cardsComics">
-  <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
+  <div id="${comic.id}"class="card" style="width: 18rem;">
+      <img src="${comic.imagen}" class="card-img-top" alt="...">
       <div class="card-body">
         <h4 class="card-title">${comic.nombre}</h4>
         <p>Editorial:${comic.editorial}</p>
         <p>Precio:$${comic.precio}</p>
-        <a  class="btn btn-primary btnComprar">Comprar.</a>
+        <a  id="agregarButton${comic.id}" class="btn btn-primary btnComprar">Agregar al carrito</a>
       </div>
     </div>
   </div>`;
       productosComics.appendChild(nuevoComic);
-    });
-    let btnsComprar = document.getElementsByClassName("btnComprar");
 
-    for (let index = 0; index < btnsComprar.length; index++) {
-      const btn = btnsComprar[index];
-      let comic = comicsMostrar[index];
-      btn.addEventListener("click", () => {
-        compraDeComics(comic.nombre, comic.precio);
+      let buttonAgregar = document.getElementById(`agregarButton${comic.id}`);
+      buttonAgregar.addEventListener("click", () => {
+        console.log(comic);
+        agregarAlCarrito(comic);
+        guardarCarritoEnElStorage();
       });
-    }
-  } else {
-    productosComics.innerHTML = "No hay productos!";
+    });
   }
 }
 
@@ -110,11 +146,11 @@ function toggleComicsList() {
 //FUNCION PARA BUSCAR COMICS
 
 function busquedaDeComic() {
-  let busquedaComic = prompt("Que comic desea ver?").toLowerCase();
+  let searchInput = document.getElementById("criterioSearch").value.toLowerCase();
   let resultadoBusqueda = comics.filter(
     (comic) =>
-      comic.editorial.toLowerCase().indexOf(busquedaComic) > -1 ||
-      comic.nombre.toLowerCase().indexOf(busquedaComic) > -1
+      comic.editorial.toLowerCase().indexOf(searchInput) > -1 ||
+      comic.nombre.toLowerCase().indexOf(searchInput) > -1
   );
   mostrarComics(resultadoBusqueda);
 }
@@ -122,11 +158,32 @@ function busquedaDeComic() {
 //BOTONES
 
 let verListadoComics = document.getElementById("verList");
+let buscarComics = document.getElementById("buscarComics");
+let botonCarrito = document.getElementById("botonCarrito");
+let modalBody = document.getElementById("modal-body");
+let botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
+let parrafoCompra = document.getElementById("precioTotal");
+let buscador = document.getElementById("searchBtn")
+
+obtenerCarritoDelStorage();
+
 verListadoComics.addEventListener("click", () => {
   toggleComicsList();
 });
 
-let buscarComics = document.getElementById("buscarComics");
 buscarComics.addEventListener("click", () => {
   busquedaDeComic();
 });
+
+botonCarrito.addEventListener("click", ()=>{
+  cargarComicsEnElCarrito(comicsEnElCarrito)
+})
+
+buscador.addEventListener("click", ()=>{
+  busquedaDeComic();
+})
+
+
+
+
+
