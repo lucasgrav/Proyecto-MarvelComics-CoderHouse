@@ -17,17 +17,11 @@
   <body>
     <header>
       <div class="buscador">
+        <!--TITULO-->
         <h1>Comic Zone</h1>
-        <form class="d-flex" role="search">
-          <input
-          id="criterioSearch"
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button id="searchBtn" class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+         <!--TITULO DE BIENVENIDA-->
+         <h2>BIENVENIDO!</h2>
+         <!--BOTON DE CARRITO-->
         <ul className="navbar-nav me-auto">
           <li className="nav-item ">
             <a
@@ -40,18 +34,26 @@
           </li>
         </ul>
       </div>
-      <h2>BIENVENIDO!</h2>
       <nav>
         <button id="verList" type="button" class="btn btn-primary btn-lg">
-          Ver Listado de comics!
+          Ver Listado COMPLETO de comics!
         </button>
-        <button id="buscarComics" type="button" class="btn btn-primary btn-lg">
-          Buscar comics!
-        </button>
+        <form class="d-flex" role="search">
+          <input
+          id="criterioSearch"
+            class="form-control me-2"
+            type="search"
+            placeholder="Buscar comics!"
+            aria-label="Buscar"
+          />
+          <button id="searchBtn" class="btn btn-outline-success btnSearch" type="button">Buscar</button>
+        </form>
       </nav>
     </header>
     <main>
+       <!--CARDS-->
       <div class="gridProducto" id="productosComics"></div>
+       <!--CARRITO-->
       <div
         class="modal fade"
         id="idModal"

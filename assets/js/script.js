@@ -1,8 +1,13 @@
 //Compra de comics
+/*----------------------------------------------------------------------------------------------------------------------*/
 //Variables
+/*----------------------------------------------------------------------------------------------------------------------*/
+
 let visibleListado = true;
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //ARRAYS
+/*----------------------------------------------------------------------------------------------------------------------*/
 const comics = [
   {
     id: 1,
@@ -16,40 +21,44 @@ const comics = [
     nombre: "Capitan America",
     precio: 1500,
     editorial: "Marvel",
-    imagen: "./assets/images/iron-man-1.jpg",
+    imagen: "./assets/images/capitanamerica.jpg",
   },
   {
     id: 3,
     nombre: "SpiderMan",
     precio: 2000,
     editorial: "Marvel",
-    imagen: "./assets/images/iron-man-1.jpg",
+    imagen: "./assets/images/spiderman.jpg",
   },
   {
     id: 4,
     nombre: "Batman",
     precio: 2200,
     editorial: "Dc",
-    imagen: "./assets/images/iron-man-1.jpg",
+    imagen: "./assets/images/batman.jpg",
   },
   {
     id: 5,
     nombre: "Los jovenes titanes",
     precio: 1700,
     editorial: "Dc",
-    imagen: "./assets/images/iron-man-1.jpg",
+    imagen: "./assets/images/jovenes-titanes-nuevos-tapa-01.webp",
   },
   {
     id: 6,
     nombre: "El acertijo",
     precio: 2500,
     editorial: "Dc",
-    imagen: "./assets/images/iron-man-1.jpg",
+    imagen: "./assets/images/acertijo.webp",
   },
 ];
+
 let comicsEnElCarrito = [];
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA AGREGAR AL CARRITO
+/*----------------------------------------------------------------------------------------------------------------------*/
+
 function agregarAlCarrito(comic) {
   comicsEnElCarrito.push(comic);
 }
@@ -58,7 +67,7 @@ function cargarComicsEnElCarrito(array) {
   modalBody.innerHTML = "";
   array.forEach((comicCarrito) => {
     modalBody.innerHTML += `
-        <div class="card border-primary mb-3" id ="productoCarrito${comicCarrito.id}" style="max-width: 540px;">
+        <div class="card border-primary mb-3" id ="productoCarrito${comicCarrito.id}" style="max-width: 200px;">
             <img class="card-img-top" src="${comicCarrito.imagen}" alt="${comicCarrito.nombre}">
             <div class="card-body">
                     <h4 class="card-title">${comicCarrito.nombre}</h4>
@@ -95,7 +104,10 @@ function obtenerCarritoDelStorage(){
  }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA MOSTRAR LISTADO
+/*----------------------------------------------------------------------------------------------------------------------*/
+
 
 let productosComics = document.getElementById("productosComics");
 
@@ -125,9 +137,12 @@ function mostrarComics(comicsMostrar) {
       });
     });
   }
+  else{productosComics.innerHTML = "<p>No hay comics!<p/>"}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA BOTON DE OCULTAR LISTADO
+/*----------------------------------------------------------------------------------------------------------------------*/
 
 function ocultarCatalogo() {
   productosComics.innerHTML = "";
@@ -143,7 +158,9 @@ function toggleComicsList() {
   visibleListado = !visibleListado;
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA BUSCAR COMICS
+/*----------------------------------------------------------------------------------------------------------------------*/
 
 function busquedaDeComic() {
   let searchInput = document.getElementById("criterioSearch").value.toLowerCase();
@@ -155,10 +172,11 @@ function busquedaDeComic() {
   mostrarComics(resultadoBusqueda);
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 //BOTONES
+/*----------------------------------------------------------------------------------------------------------------------*/
 
 let verListadoComics = document.getElementById("verList");
-let buscarComics = document.getElementById("buscarComics");
 let botonCarrito = document.getElementById("botonCarrito");
 let modalBody = document.getElementById("modal-body");
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
@@ -169,10 +187,6 @@ obtenerCarritoDelStorage();
 
 verListadoComics.addEventListener("click", () => {
   toggleComicsList();
-});
-
-buscarComics.addEventListener("click", () => {
-  busquedaDeComic();
 });
 
 botonCarrito.addEventListener("click", ()=>{
