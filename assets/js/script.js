@@ -86,12 +86,7 @@ function totalDeLaCompra(array){
   acumulador = array.reduce((acumulador, comicCarrito)=>{
   return acumulador + comicCarrito.precio
   }, 0)
-  if(acumulador == 0){
-    parrafoCompra.innerHTML = `No hay comics en el carrito, agregue alguno!`
-  }
-  else{
-  parrafoCompra.innerHTML = `El total es $${acumulador}`
-}
+  acumulador == 0 ? parrafoCompra.innerHTML = `No hay comics en el carrito, agregue alguno!` : parrafoCompra.innerHTML = `El total es $${acumulador}`;
 }
 
 function guardarCarritoEnElStorage(){
@@ -134,6 +129,20 @@ function mostrarComics(comicsMostrar) {
         console.log(comic);
         agregarAlCarrito(comic);
         guardarCarritoEnElStorage();
+        Toastify({
+          text: "Agregado al carrito!",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #0d6efd, #5489d9)",
+          },
+          onClick: function(){} // Callback after click
+        }).showToast();
       });
     });
   }
@@ -148,13 +157,8 @@ function ocultarCatalogo() {
   productosComics.innerHTML = "";
 }
 function toggleComicsList() {
-  if (visibleListado) {
-    mostrarComics(comics);
-    verListadoComics.innerHTML = "Ocultar listado de comics!";
-  } else {
-    ocultarCatalogo();
-    verListadoComics.innerHTML = "Ver listado de comics!";
-  }
+  visibleListado ? mostrarComics(comics)  : ocultarCatalogo();
+  visibleListado ? verListadoComics.innerHTML = "Ocultar listado de comics!"  :verListadoComics.innerHTML = "Ver listado de comics!";
   visibleListado = !visibleListado;
 }
 
@@ -182,6 +186,7 @@ let modalBody = document.getElementById("modal-body");
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
 let parrafoCompra = document.getElementById("precioTotal");
 let buscador = document.getElementById("searchBtn")
+let eliminarProducto = document.getElementById("botonEliminar")
 
 obtenerCarritoDelStorage();
 
@@ -196,6 +201,12 @@ botonCarrito.addEventListener("click", ()=>{
 buscador.addEventListener("click", ()=>{
   busquedaDeComic();
 })
+botonFinalizarCompra.addEventListener("click", ()=>{
+  Swal.fire('Compra finalizada, gracias por comprar!')
+  comicsEnElCarrito.splice(0, 100);
+  guardarCarritoEnElStorage();
+})
+
 
 
 
