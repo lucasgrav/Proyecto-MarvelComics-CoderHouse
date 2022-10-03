@@ -203,7 +203,7 @@ buscador.addEventListener("click", ()=>{
 })
 botonFinalizarCompra.addEventListener("click", ()=>{
   Swal.fire('Compra finalizada, gracias por comprar!')
-  comicsEnElCarrito.splice(0, 100);
+  comicsEnElCarrito = [];
   guardarCarritoEnElStorage();
 })
 
