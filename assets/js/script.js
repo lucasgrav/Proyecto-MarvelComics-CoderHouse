@@ -60,7 +60,30 @@ let comicsEnElCarrito = [];
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 function agregarAlCarrito(comic) {
-  comicsEnElCarrito.push(comic);
+  let comicAgregado = comicsEnElCarrito.find((elem) => elem.id == comic.id);
+  if (comicAgregado == undefined) {
+    comicsEnElCarrito.push(comic);
+    Toastify({
+      text: "Agregado al carrito!",
+      duration: 3000,
+      destination: "https://github.com/apvarun/toastify-js",
+      newWindow: true,
+      close: true,
+      gravity: "bottom", // `top` or `bottom`
+      position: "left", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #0d6efd, #5489d9)",
+      },
+      onClick: function () {}, // Callback after click
+    }).showToast();
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Este comic ya se encuentra en el carrito!",
+    });
+  }
 }
 
 function cargarComicsEnElCarrito(array) {
@@ -73,36 +96,46 @@ function cargarComicsEnElCarrito(array) {
                     <h4 class="card-title">${comicCarrito.nombre}</h4>
                 
                     <p class="card-text">$${comicCarrito.precio}</p> 
-                    <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
+                    <button class= "btn btn-danger" id="botonEliminar${comicCarrito.id}"><i class="fas fa-trash-alt"></i></button>
             </div>                    
         </div>
 `;
   });
-  totalDeLaCompra(comicsEnElCarrito)
+  array.forEach((comicCarrito, indice) => {
+    document
+      .getElementById(`botonEliminar${comicCarrito.id}`)
+      .addEventListener("click", () => {
+        array.splice(indice, 1);
+        guardarCarritoEnElStorage();
+        cargarComicsEnElCarrito(array);
+      });
+  });
+  totalDeLaCompra(comicsEnElCarrito);
 }
 
-function totalDeLaCompra(array){
-  let acumulador = 0
-  acumulador = array.reduce((acumulador, comicCarrito)=>{
-  return acumulador + comicCarrito.precio
-  }, 0)
-  acumulador == 0 ? parrafoCompra.innerHTML = `No hay comics en el carrito, agregue alguno!` : parrafoCompra.innerHTML = `El total es $${acumulador}`;
+function totalDeLaCompra(array) {
+  let acumulador = 0;
+  acumulador = array.reduce((acumulador, comicCarrito) => {
+    return acumulador + comicCarrito.precio;
+  }, 0);
+  acumulador == 0
+    ? (parrafoCompra.innerHTML = `No hay comics en el carrito, agregue alguno!`)
+    : (parrafoCompra.innerHTML = `El total es $${acumulador}`);
 }
 
-function guardarCarritoEnElStorage(){
-  localStorage.setItem("carritoDeComics", JSON.stringify(comicsEnElCarrito))
+function guardarCarritoEnElStorage() {
+  localStorage.setItem("carritoDeComics", JSON.stringify(comicsEnElCarrito));
 }
-function obtenerCarritoDelStorage(){
- let getComics = localStorage.getItem("carritoDeComics")
- if(getComics != null){
-  comicsEnElCarrito = JSON.parse(getComics)
- }
+function obtenerCarritoDelStorage() {
+  let getComics = localStorage.getItem("carritoDeComics");
+  if (getComics != null) {
+    comicsEnElCarrito = JSON.parse(getComics);
+  }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA MOSTRAR LISTADO
 /*----------------------------------------------------------------------------------------------------------------------*/
-
 
 let productosComics = document.getElementById("productosComics");
 
@@ -129,24 +162,11 @@ function mostrarComics(comicsMostrar) {
         console.log(comic);
         agregarAlCarrito(comic);
         guardarCarritoEnElStorage();
-        Toastify({
-          text: "Agregado al carrito!",
-          duration: 3000,
-          destination: "https://github.com/apvarun/toastify-js",
-          newWindow: true,
-          close: true,
-          gravity: "bottom", // `top` or `bottom`
-          position: "left", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background: "linear-gradient(to right, #0d6efd, #5489d9)",
-          },
-          onClick: function(){} // Callback after click
-        }).showToast();
       });
     });
+  } else {
+    productosComics.innerHTML = "<p>No hay comics!<p/>";
   }
-  else{productosComics.innerHTML = "<p>No hay comics!<p/>"}
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -157,8 +177,10 @@ function ocultarCatalogo() {
   productosComics.innerHTML = "";
 }
 function toggleComicsList() {
-  visibleListado ? mostrarComics(comics)  : ocultarCatalogo();
-  visibleListado ? verListadoComics.innerHTML = "Ocultar listado de comics!"  :verListadoComics.innerHTML = "Ver listado de comics!";
+  visibleListado ? mostrarComics(comics) : ocultarCatalogo();
+  visibleListado
+    ? (verListadoComics.innerHTML = "Ocultar listado de comics!")
+    : (verListadoComics.innerHTML = "Ver listado de comics!");
   visibleListado = !visibleListado;
 }
 
@@ -167,7 +189,9 @@ function toggleComicsList() {
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 function busquedaDeComic() {
-  let searchInput = document.getElementById("criterioSearch").value.toLowerCase();
+  let searchInput = document
+    .getElementById("criterioSearch")
+    .value.toLowerCase();
   let resultadoBusqueda = comics.filter(
     (comic) =>
       comic.editorial.toLowerCase().indexOf(searchInput) > -1 ||
@@ -185,8 +209,7 @@ let botonCarrito = document.getElementById("botonCarrito");
 let modalBody = document.getElementById("modal-body");
 let botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
 let parrafoCompra = document.getElementById("precioTotal");
-let buscador = document.getElementById("searchBtn")
-let eliminarProducto = document.getElementById("botonEliminar")
+let buscador = document.getElementById("searchBtn");
 
 obtenerCarritoDelStorage();
 
@@ -194,21 +217,15 @@ verListadoComics.addEventListener("click", () => {
   toggleComicsList();
 });
 
-botonCarrito.addEventListener("click", ()=>{
-  cargarComicsEnElCarrito(comicsEnElCarrito)
-})
+botonCarrito.addEventListener("click", () => {
+  cargarComicsEnElCarrito(comicsEnElCarrito);
+});
 
-buscador.addEventListener("click", ()=>{
+buscador.addEventListener("click", () => {
   busquedaDeComic();
-})
-botonFinalizarCompra.addEventListener("click", ()=>{
-  Swal.fire('Compra finalizada, gracias por comprar!')
+});
+botonFinalizarCompra.addEventListener("click", () => {
+  Swal.fire("Compra finalizada, gracias por comprar!");
   comicsEnElCarrito = [];
   guardarCarritoEnElStorage();
-})
-
-
-
-
-
-
+});
