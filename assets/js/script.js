@@ -69,13 +69,13 @@ function agregarAlCarrito(comic) {
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
       close: true,
-      gravity: "bottom", // `top` or `bottom`
-      position: "left", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "bottom",
+      position: "left",
+      stopOnFocus: true,
       style: {
         background: "linear-gradient(to right, #0d6efd, #5489d9)",
       },
-      onClick: function () {}, // Callback after click
+      onClick: function () {},
     }).showToast();
   } else {
     Swal.fire({
@@ -165,7 +165,8 @@ function mostrarComics(comicsMostrar) {
       });
     });
   } else {
-    productosComics.innerHTML = "<p>No hay comics!<p/>";
+    productosComics.innerHTML =
+      "<div ></div><div class = noHayComics><p>No se han encontrado comics!<p/></div><div></div>";
   }
 }
 
@@ -180,7 +181,7 @@ function toggleComicsList() {
   visibleListado ? mostrarComics(comics) : ocultarCatalogo();
   visibleListado
     ? (verListadoComics.innerHTML = "Ocultar listado de comics!")
-    : (verListadoComics.innerHTML = "Ver listado de comics!");
+    : (verListadoComics.innerHTML = "Ver listado COMPLETO de comics!");
   visibleListado = !visibleListado;
 }
 
@@ -225,7 +226,7 @@ buscador.addEventListener("click", () => {
   busquedaDeComic();
 });
 botonFinalizarCompra.addEventListener("click", () => {
-  Swal.fire("Compra finalizada, gracias por comprar!");
+  Swal.fire("Gracias, vuelva pronto!");
   comicsEnElCarrito = [];
   guardarCarritoEnElStorage();
 });

@@ -18,14 +18,22 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <!--TOASTIFY-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="http://fonts.cdnfonts.com/css/houston-comics-personal-use" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/excelsior-comics" rel="stylesheet">
+                
   </head>
   <body>
     <header>
       <div class="buscador">
         <!--TITULO-->
-        <h1>Comic Zone</h1>
+        <div>
+          <img src="/assets/images/comiclogooooooooo-removebg-preview.png" alt="" width="200px">
+        </div>
          <!--TITULO DE BIENVENIDA-->
-         <h2>BIENVENIDO!</h2>
+         <div class="imagenesDeMarcas">
+          <h2 class="verWiki">Ver wiki</h2>
+          <a href="/infoCharacters.html"><img src="/assets/images/marvel.jpg" alt="" width="100px"></a>
+         </div>
          <!--BOTON DE CARRITO-->
         <ul className="navbar-nav me-auto">
           <li className="nav-item ">
@@ -43,10 +51,7 @@
         <button id="verList" type="button" class="btn btn-primary btn-lg">
           Ver Listado COMPLETO de comics!
         </button>
-        <button  type="button" class="btn btn-primary btn-lg">
-          <a href="/infoCharacters.html">Ver Wiki de Heroes y villanos</a>
-        </button>
-        <form class="d-flex" role="search">
+        <form class="d-flex col-sm-3" role="search">
           <input
           id="criterioSearch"
             class="form-control me-2"
@@ -57,6 +62,7 @@
           <button id="searchBtn" class="btn btn-outline-success btnSearch" type="button">Buscar</button>
         </form>
       </nav>
+    </div>
     </header>
     <main>
        <!--CARDS-->

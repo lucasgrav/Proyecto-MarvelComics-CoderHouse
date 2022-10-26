@@ -5,7 +5,7 @@
 .buscador {
   height: 200px;
   color: rgb(255, 255, 255);
-  background-image:url(/assets/images/backroundeBody.jpg) ;
+  background-image:url(/assets/images/pexels-erik-mclean-6654177.jpg) ;
   background-size: 100%;
   display: flex;
   align-items: center;
@@ -23,13 +23,21 @@ h2{
   display: flex;
   justify-content: center;
 }
-body{
-  background-image: url();
-  background-size: cover;
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(135deg, rgb(0, 0, 0) 23%, rgb(41, 41, 41) 100%); 
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  
 }
 nav{
   margin-top: 20px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   justify-content: space-around;
@@ -97,10 +105,189 @@ h3.title{
   justify-content: center;
   margin-top: 10px;
   padding: 10px;
-  font-size: 20px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 30px;
+  font-family: 'Excelsior Comics', sans-serif;
 }
 a{
   color: aliceblue;
   text-decoration: none;
+}
+.wiki{
+  color: rgb(255, 255, 255);
+font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.volverAlInicio{
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+
+.verWiki{
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.btn-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg:#f21c24;
+  --bs-btn-border-color: #f21c24;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #f21c24;
+  --bs-btn-hover-border-color: #d33b3b4;
+  --bs-btn-focus-shadow-rgb: 130,138,145;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #f21c24;
+  --bs-btn-active-border-color: #f21c24;
+  --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #f21c24;
+  --bs-btn-disabled-border-color: #f21c24;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.btn{
+  border-radius: 0;
+  border: 3px rgb(0, 0, 0) solid;
+}
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #f21c24;
+  --bs-btn-border-color: #f21c24;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #f21c24;
+  --bs-btn-hover-border-color: #f21c24;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #f21c24;
+  --bs-btn-active-border-color: #f21c24;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #f21c24;
+  --bs-btn-disabled-border-color: #f21c24;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.btnSearch {
+  background-color: #f21c24;
+}
+.btn-outline-success {
+  --bs-btn-color: #f21c24;
+  --bs-btn-border-color: #f21c24;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #f21c24;
+  --bs-btn-hover-border-color: #f21c24;
+  --bs-btn-focus-shadow-rgb: 25,135,84;
+  --bs-btn-active-color: #f21c24;
+  --bs-btn-active-bg: #f21c24;
+  --bs-btn-active-border-color: #f21c24;
+  --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #f21c24;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #f21c24;
+  --bs-gradient: none;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgb(33, 37, 41);
+  background-color: rgb(255, 255, 255);
+  background-clip: padding-box;
+  border: 3px solid rgb(0, 0, 0);
+  appearance: none;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  font-family: 'Excelsior Comics', sans-serif;
+  font-size: 25px;
+}
+.card {
+  --bs-card-spacer-y: 1rem;
+  --bs-card-spacer-x: 1rem;
+  --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-border-width: 1px;
+  --bs-card-border-color: black; 
+  --bs-card-border-radius: 0; 
+  --bs-card-box-shadow: ;
+  --bs-card-inner-border-radius:0; 
+  --bs-card-cap-padding-y: 0.5rem;
+  --bs-card-cap-padding-x: 1rem;
+  --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
+  --bs-card-bg: #fff;
+  --bs-card-img-overlay-padding: 1rem;
+  --bs-card-group-margin: 0.75rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0px;
+  height: var(--bs-card-height);
+  overflow-wrap: break-word;
+  background-color: var(--bs-card-bg);
+  background-clip: border-box;
+  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+}
+.card-title{
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.card-body p{
+  font-size: 30px;
+font-family: 'Excelsior Comics', sans-serif;
+}
+
+.noHayComics p{
+  font-size: 40px;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+}
+.h5, h5 {
+  font-family: 'Houston Comics Personal Use', sans-serif;
+  font-size: 20px;
+}
+.row p{
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-family: 'Excelsior Comics', sans-serif;
+}
+.btn-success {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #2b66b3;
+  --bs-btn-border-color: #2b66b3;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #2b66b3;
+  --bs-btn-hover-border-color: #2b66b3;
+  --bs-btn-focus-shadow-rgb: 60,153,110;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #2b66b3;
+  --bs-btn-active-border-color: #2b66b3;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #2b66b3;
+  --bs-btn-disabled-border-color: #2b66b3;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+}
+.swal2-title {
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.8em 1em 0;
+  color: inherit;
+  font-size: 1.875em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: none;
+  word-wrap: break-word;
+  font-family: 'Houston Comics Personal Use', sans-serif;
+  color: black;
+}
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #2b66b3;
+  color: #fff;
+  font-size: 1em;
+  font-family: 'Houston Comics Personal Use', sans-serif;
 }
